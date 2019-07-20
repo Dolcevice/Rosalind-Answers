@@ -10,17 +10,17 @@
 from common.toProtein import ToProtein as tp
 from common.toRNA import ToRNA as tr
 
-with open('6sample.txt', 'r') as file:
+with open('6rosalind.txt', 'r') as file:
     total_input = file.read()
+    file.close()
 target = ''
 introns = []
 
 s = total_input[total_input.index('\n') + 1:]
 target = s[:s.index('>')]
+print(target)
 s = s[s.index('>'):]
 target = target.rstrip()
-
-original = target
 
 
 while True:
@@ -30,13 +30,11 @@ while True:
         else:
             try:
                 intron = s[:s.index('>') - 1]
-                print(intron)
                 intron.rstrip()
                 introns.append(intron)
                 s = s[s.index('>'):]
             except:
                 intron = s
-                print(intron)
                 intron.rstrip()
                 introns.append(intron)
                 break
@@ -46,5 +44,13 @@ while True:
 for intron in introns:
     target = target.replace(intron, '')
 
+
 target = tr.conversion(target)
-print(tp.conversion(target))
+target = "".join(target.split())
+
+target = tp.conversion(target)
+target = target.replace(' ', '')
+
+
+outfile = open('answer.txt', 'w')
+outfile.write(target)
