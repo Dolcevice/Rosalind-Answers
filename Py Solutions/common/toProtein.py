@@ -16,7 +16,7 @@ class ToProtein:
                 try:
                     yeet = ref.codon_reference.get(insertion)
                     if yeet == "Stop":
-                        translated += ' '
+                        translated += ''
                     else:
                         translated += yeet
                     count = 0

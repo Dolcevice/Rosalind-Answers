@@ -18,10 +18,8 @@ introns = []
 
 s = total_input[total_input.index('\n') + 1:]
 target = s[:s.index('>')]
-print(target)
 s = s[s.index('>'):]
 target = target.rstrip()
-
 
 while True:
     if not s == '':
@@ -30,27 +28,24 @@ while True:
         else:
             try:
                 intron = s[:s.index('>') - 1]
-                intron.rstrip()
                 introns.append(intron)
                 s = s[s.index('>'):]
             except:
-                intron = s
-                intron.rstrip()
+                intron = s.rstrip()
                 introns.append(intron)
                 break
     else:
         break
-
+target = target.replace('\n', '')
 for intron in introns:
     target = target.replace(intron, '')
-
 
 target = tr.conversion(target)
 target = "".join(target.split())
 
 target = tp.conversion(target)
-target = target.replace(' ', '')
-
 
 outfile = open('answer.txt', 'w')
 outfile.write(target)
+
+print(target)
