@@ -7,3 +7,44 @@
 # Return: A protein string resulting from transcribing and translating the exons of s. (Note: Only one solution will
 # exist for the dataset provided.)
 
+from common.toProtein import ToProtein as tp
+from common.toRNA import ToRNA as tr
+
+with open('6sample.txt', 'r') as file:
+    total_input = file.read()
+target = ''
+introns = []
+
+s = total_input[total_input.index('\n') + 1:]
+target = s[:s.index('>')]
+s = s[s.index('>'):]
+target = target.rstrip()
+
+original = target
+
+
+while True:
+    if not s == '':
+        if s[0] == '>':
+            s = s[s.index('\n') + 1:]
+        else:
+            try:
+                intron = s[:s.index('>') - 1]
+                print(intron)
+                intron.rstrip()
+                introns.append(intron)
+                s = s[s.index('>'):]
+            except:
+                intron = s
+                print(intron)
+                intron.rstrip()
+                introns.append(intron)
+                break
+    else:
+        break
+
+for intron in introns:
+    target = target.replace(intron, '')
+
+target = tr.conversion(target)
+print(tp.conversion(target))
