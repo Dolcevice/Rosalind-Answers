@@ -3,6 +3,7 @@ target = input()
 target = target.replace(' ', '')
 print()
 
+
 # returns the reverse compliment of DNA strand
 def get_recomp(target_str):
     reverse = target_str[::-1]
